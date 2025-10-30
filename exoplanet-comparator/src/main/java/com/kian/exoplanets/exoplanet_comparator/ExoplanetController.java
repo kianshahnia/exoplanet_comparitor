@@ -25,6 +25,6 @@ public class ExoplanetController {
 
     @GetMapping
     public List<ExoPlanet> getAllPlanets() {
-        return repo.findAll();
+        return repo.findAll();  
     }
 }

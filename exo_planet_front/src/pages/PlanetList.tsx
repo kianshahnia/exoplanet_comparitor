@@ -3,8 +3,7 @@ import PlanetListComponent from "../components/PlanetListComponent";
 function PlanetList() {
 
 
-
-   return (
+  return (
     <div>
       <h1>Exoplanet Database</h1>
       <PlanetListComponent />

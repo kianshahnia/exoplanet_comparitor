@@ -1,0 +1,81 @@
+/* reset css start */
+
+/* html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+} */
+
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* reset css end */
+
+body,
+html {
+  font-family: 'Poppins-Medium';
+  color: white;
+  background: var(--DavysGray);
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 auto;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --purple: #2b2d42;
+  --lightgray: #8d99ae;
+  --whitegray: #edf2f4;
+  --navyblue: #3a506b;
+  --darknavy: #0b132b;
+  --gray: #2a2d34;
+  --lightblue: #62b6cb;
+  --AliceBlue: #f4faff;
+  --Platinum: #dee7e7;
+  --Thistle: #B7ADCF;
+  --PaynesGray: #4F646F;
+  --DavysGray: #535657;
+  --pink: #fc9886;
+  --darkerpink: #d89e94;
+  --lightblue: #93a7aa;
+  --darkerblue: #728992;
+  --blue: #6e8692;
+  --dustyrosepink: #C9A9A6;
+  --redpink: #A97982;
+}
+
+  /* --green: #6a7565;
+  --artichokegreen: #888d7a; */
+

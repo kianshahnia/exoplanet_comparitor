@@ -21,14 +21,13 @@ export interface ExoPlanet {
   releasedate: string;   // ISO date string from backend
 }
 
-// 2️⃣ React component
 export default function PlanetTable() {
   const [planets, setPlanets] = useState<ExoPlanet[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // 3️⃣ Fetch once on mount
+
   useEffect(() => {
-    fetch("/api/planets")
+    fetch('/api/planets')
       .then((res) => res.json())
       .then((data: ExoPlanet[]) => {
         setPlanets(data);
@@ -43,7 +42,6 @@ export default function PlanetTable() {
   if (loading) return <p>Loading planets...</p>;
   if (planets.length === 0) return <p>No planets found.</p>;
 
-  // 4️⃣ Render the table
   return (
     <div style={{ overflowX: "auto", padding: "1rem" }}>
       <table
@@ -52,8 +50,8 @@ export default function PlanetTable() {
         cellSpacing={0}
         style={{ width: "100%", borderCollapse: "collapse" }}
       >
-        <thead style={{ backgroundColor: "#eee" }}>
-          <tr>
+        <thead className="list_container">
+          <tr >
             <th>ID</th>
             <th>Name</th>
             <th>Hostname</th>
