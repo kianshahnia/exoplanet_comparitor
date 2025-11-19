@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// 1️⃣ Define the shape of your data (matching your Java entity)
 export interface ExoPlanet {
   id: number;
   name: string;
@@ -9,35 +8,39 @@ export interface ExoPlanet {
   discoverymethod: string;
   disc_year: number;
   disc_facility: string;
-  pl_rade: number;       // Earth radii
-  pl_bmassj: number;     // Jupiter masses
-  pl_eqt: number;        // equilibrium temperature
+  pl_rade: number; 
+  pl_bmassj: number; 
+  pl_eqt: number; 
   st_spectype: string;
-  st_teff: number;
+  st_teff: number; 
   st_rad: number;
   st_mass: number;
   sy_dist: number;
-  rowupdate: string;     // ISO date string from backend
-  releasedate: string;   // ISO date string from backend
+  rowupdate: string; 
+  releasedate: string; 
 }
 
 export default function PlanetTable() {
   const [planets, setPlanets] = useState<ExoPlanet[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
+  const [page, setPage] = useState<number>(0);
+  const [size] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
 
   useEffect(() => {
-    fetch('/api/planets')
+    setLoading(true);
+    fetch(`/api/planets?page=${page}&size=${size}`)
       .then((res) => res.json())
-      .then((data: ExoPlanet[]) => {
-        setPlanets(data);
+      .then((data) => {
+        setPlanets(data.content || data);
+        setTotalPages(data.totalPages || Math.ceil((data.length || 0) / size));
         setLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching planets:", err);
         setLoading(false);
       });
-  }, []);
+  }, [page, size]);
 
   if (loading) return <p>Loading planets...</p>;
   if (planets.length === 0) return <p>No planets found.</p>;
@@ -51,7 +54,7 @@ export default function PlanetTable() {
         style={{ width: "100%", borderCollapse: "collapse" }}
       >
         <thead className="list_container">
-          <tr >
+          <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Hostname</th>
@@ -87,7 +90,7 @@ export default function PlanetTable() {
               <td>{p.st_spectype}</td>
               <td>{p.st_teff}</td>
               <td>{p.st_rad}</td>
-              <td>{p.st_mass}</td> 
+              <td>{p.st_mass}</td>
               <td>{p.sy_dist?.toFixed(1)}</td>
               <td>{new Date(p.rowupdate).toLocaleDateString()}</td>
               <td>{new Date(p.releasedate).toLocaleDateString()}</td>
@@ -95,6 +98,43 @@ export default function PlanetTable() {
           ))}
         </tbody>
       </table>
+
+      {/* Pagination Controls */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "1rem",
+          marginTop: "1rem",
+          alignItems: "center",
+        }}
+      >
+        <button
+          onClick={() => setPage(Math.max(0, page - 1))}
+          disabled={page === 0}
+          style={{
+            padding: "0.5rem 1rem",
+            cursor: page === 0 ? "not-allowed" : "pointer",
+          }}
+        >
+          Previous
+        </button>
+
+        <span style={{ margin: "0 1rem" }}>
+          Page {page + 1} of {totalPages || 1}
+        </span>
+
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page + 1 >= totalPages}
+          style={{
+            padding: "0.5rem 1rem",
+            cursor: page + 1 >= totalPages ? "not-allowed" : "pointer",
+          }}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }
