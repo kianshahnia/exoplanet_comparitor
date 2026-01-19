@@ -8,42 +8,59 @@ export interface ExoPlanet {
   discoverymethod: string;
   disc_year: number;
   disc_facility: string;
-  pl_rade: number; 
-  pl_bmassj: number; 
-  pl_eqt: number; 
+  pl_rade: number;
+  pl_bmassj: number;
+  pl_eqt: number;
   st_spectype: string;
-  st_teff: number; 
+  st_teff: number;
   st_rad: number;
   st_mass: number;
   sy_dist: number;
-  rowupdate: string; 
-  releasedate: string; 
+  rowupdate: string;
+  releasedate: string;
 }
 
 export default function PlanetTable() {
   const [planets, setPlanets] = useState<ExoPlanet[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(0);
-  const [size] = useState<number>(1);
+  const [size] = useState<number>(10);
   const [totalPages, setTotalPages] = useState<number>(0);
 
   useEffect(() => {
     setLoading(true);
+
     fetch(`/api/planets?page=${page}&size=${size}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPlanets(data.content || data);
-        setTotalPages(data.totalPages || Math.ceil((data.length || 0) / size));
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP status ${res.status}`);
+        return res.json();
+      })
+      .then((data: any) => {
+
+        const allPlanets = Array.isArray(data) ? data : (data.content || []);
+        
+        setPlanets(allPlanets);
+        
+        if (data.totalPages) {
+            setTotalPages(data.totalPages);
+        } else {
+            setTotalPages(Math.ceil(allPlanets.length / size));
+        }
+
         setLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching planets:", err);
+        setPlanets([]);
         setLoading(false);
       });
-  }, [page, size]);
+  }, []);
 
   if (loading) return <p>Loading planets...</p>;
-  if (planets.length === 0) return <p>No planets found.</p>;
+  if (!planets || planets.length === 0) return <p>No planets found.</p>;
+
+  const startIndex = page * size;
+  const currentTableData = planets.slice(startIndex, startIndex + size);
 
   return (
     <div style={{ overflowX: "auto", padding: "1rem" }}>
@@ -75,7 +92,8 @@ export default function PlanetTable() {
           </tr>
         </thead>
         <tbody>
-          {planets.map((p) => (
+          {/* Map over currentTableData instead of planets */}
+          {currentTableData.map((p) => (
             <tr key={p.id}>
               <td>{p.id}</td>
               <td>{p.name}</td>

@@ -1,0 +1,27 @@
+.home-container {
+    max-width: 60%;
+    width: 100%;
+    margin: auto;
+    padding: 0rem 2rem 0rem 2rem;
+    height: 120vh;
+    display: flex;
+    justify-content: center;
+}
+
+.inner-home-container {
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.web-title {
+    color: white;
+    margin: 0;
+    font-size: 8rem;
+    font-family: 'Poppins-Medium';
+}
+
+.web-title-explanation {
+    color: white;
+    margin-top: 15px;
+}

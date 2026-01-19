@@ -38,36 +38,36 @@ html {
   height: 11%;
 }
 
-.nav #logo {
+nav #logo {
   width: 75px;
   height: 75px;
   margin-right: 75px;
 }
 
-.nav-link {
+a.nav-link {
   color: white;
   font-family: "Poppins-Regular";
   margin: 15px 15px 10px 20px;
   font-size: 1.2em;
 }
 
-.nav-link:hover {
+a.nav-link:hover {
   border-bottom: 2px solid white;
   color: white;
   transition: 0.3s;
 }
 
-.nav-link:hover::after {
+a.nav-link:hover::after {
   color: white;
 }
 
-.nav-link:active {
+a.nav-link:active {
   color: white;
 }
 
 
-.nav-container.scrolled {
-  background-color: rgb(0, 0, 0) !important;
+a.nav-container.scrolled {
+  background-color: rgb(255, 255, 255) !important;
   backdrop-filter: blur(50px);
   transition: background-color 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
