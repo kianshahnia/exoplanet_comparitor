@@ -63,15 +63,10 @@ export default function PlanetTable() {
   const currentTableData = planets.slice(startIndex, startIndex + size);
 
   return (
-    <div style={{ overflowX: "auto", padding: "1rem" }}>
-      <table
-        border={1}
-        cellPadding={6}
-        cellSpacing={0}
-        style={{ width: "100%", borderCollapse: "collapse" }}
-      >
-        <thead className="list_container">
-          <tr>
+    <div className="table-container">
+      <table className="table">
+        <thead className="table-header">
+          <tr className="table-entries">
             <th>ID</th>
             <th>Name</th>
             <th>Hostname</th>
@@ -118,37 +113,23 @@ export default function PlanetTable() {
       </table>
 
       {/* Pagination Controls */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "1rem",
-          marginTop: "1rem",
-          alignItems: "center",
-        }}
-      >
+      <div className="button-container">
         <button
+          className="prev-button"
           onClick={() => setPage(Math.max(0, page - 1))}
           disabled={page === 0}
-          style={{
-            padding: "0.5rem 1rem",
-            cursor: page === 0 ? "not-allowed" : "pointer",
-          }}
         >
           Previous
         </button>
 
-        <span style={{ margin: "0 1rem" }}>
+        <span>
           Page {page + 1} of {totalPages || 1}
         </span>
 
         <button
+          className="next-button"
           onClick={() => setPage(page + 1)}
           disabled={page + 1 >= totalPages}
-          style={{
-            padding: "0.5rem 1rem",
-            cursor: page + 1 >= totalPages ? "not-allowed" : "pointer",
-          }}
         >
           Next
         </button>

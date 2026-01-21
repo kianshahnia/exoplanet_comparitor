@@ -10,6 +10,8 @@ html {
   --bs-nav-link-color: white;
   --bs-nav-link-hover-color: white;
   align-items: center;
+  display: inline-flex;
+  
 }
 
 /* */
@@ -28,14 +30,15 @@ html {
 }
 
 .nav-container {
-  display: flex;
+  display: inline-flex;
   z-index: 9999;
   justify-content: center;
   position: sticky;
-  top: 0;
+  top: 30px;
   width: 100%;
   transition: background-color 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);
   height: 11%;
+  text-decoration: none;
 }
 
 nav #logo {
@@ -49,6 +52,7 @@ a.nav-link {
   font-family: "Poppins-Regular";
   margin: 15px 15px 10px 20px;
   font-size: 1.2em;
+  text-decoration: none;
 }
 
 a.nav-link:hover {

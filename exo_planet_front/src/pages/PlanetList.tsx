@@ -5,7 +5,7 @@ function PlanetList() {
 
   return (
     <div>
-      <h1>Exoplanet Database</h1>
+      <h1 >Exoplanet Database</h1>
       <PlanetListComponent />
     </div>
   );

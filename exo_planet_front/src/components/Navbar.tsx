@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
 
     return (
         <div className="nav-container">
-            <ul className="nav nav-underline">
+            <ul className="nav">
                 <li className="nav-item">
                     <Link to="/Home" className="nav-link"> home </Link>
                 </li>
