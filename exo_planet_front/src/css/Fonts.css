@@ -112,3 +112,18 @@
     font-family: "Poppins-ThinItalic";
     src: url(/src/assets/fonts/Poppins-ThinItalic.ttf);
 }
+
+@font-face {
+    font-family: "CutiveMono-Regular";
+    src: url(/src/assets/fonts/CutiveMono-Regular.ttf);
+}
+
+@font-face {
+    font-family: "SpaceMono-Regular";
+    src: url(/src/assets/fonts/SpaceMono-Regular.ttf);
+}
+
+@font-face {
+    font-family: "SUSE-VariableFont_wght";
+    src: url(/src/assets/fonts/SUSE-VariableFont_wght.ttf);
+}

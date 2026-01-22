@@ -39,8 +39,8 @@ q:before, q:after {
 body,
 html {
   font-family: 'Poppins-Medium';
+  background-color: black;
   color: white;
-  background: var(--darknavy);
   width: 100%;
   height: 100%;
   margin: 0 auto;

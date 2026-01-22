@@ -1,34 +1,102 @@
+/* 1. Main Page Layout */
 .table-container {
-    display: flex;
-    justify-content: center;
-    margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+  /* Deep space background (fallback color) */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-a.table {
- 
-    width: 100%;
-}
-
-.table-header {
-    background-color: rgb(28, 28, 79);
-    margin: 1rem;
-}
-
-.table-entries {
-  margin: 2rem;
-  background-color: black;
-
+/* 2. The Table Wrapper */
+.table {
+  width: 100%;
+  max-width: 95vw;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  background-color: rgba(22, 33, 62, 0.95);
   
+  /* UPDATED: Reduced font size further */
+  font-size: 0.65rem; 
+  table-layout: auto;
 }
 
+/* 3. Header Styling */
+.table-header th {
+  background-color: #1a1a2e;
+  color: #4cc9f0;
+  padding: 10px 8px; /* Slightly reduced padding to match smaller font */
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #2e3b55;
+  white-space: nowrap;
+  
+  /* UPDATED: Reduced header font size further */
+  font-size: 0.6rem; 
+}
+
+/* 4. Row & Cell Styling */
+.table td {
+  padding: 8px 6px; /* Tighter cell padding */
+  color: #e0e0e0;
+  border-bottom: 1px solid #2e3b55;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* 5. Zebra Striping */
+.table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* 6. Hover Effect */
+.table tbody tr:hover {
+  background-color: rgba(76, 201, 240, 0.1);
+  cursor: default;
+}
+
+/* 7. Pagination Controls */
 .button-container {
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.8rem; /* Slightly smaller to match table */
 }
 
-.prev-button {
-
+/* 8. Button Styling */
+.prev-button, .next-button {
+  background-color: #4cc9f0;
+  color: #0b0d17;
+  border: none;
+  padding: 6px 14px; /* Slightly smaller button padding */
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-size: 0.75rem; /* Smaller button text */
 }
 
-.next-button {
+.prev-button:hover, .next-button:hover {
+  background-color: #3db5d8;
+  transform: translateY(-1px);
+}
 
+.prev-button:disabled, .next-button:disabled {
+  background-color: #2e3b55;
+  color: #666;
+  cursor: not-allowed;
+  transform: none;
 }
