@@ -10,4 +10,9 @@ class ExoplanetComparatorApplicationTests {
 	void contextLoads() {
 	}
 
+    @Test
+    void contextLoads() {
+
+    }
+
 }

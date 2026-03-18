@@ -38,14 +38,15 @@ q:before, q:after {
 
 body,
 html {
-  font-family: 'Poppins-Medium';
+  font-family: 'SpaceMono-Regular', monospace;
   background-color: black;
-  color: white;
+  color: #00f2ff;
   width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 auto;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 * {
@@ -55,26 +56,36 @@ html {
 }
 
 :root {
-  --purple: #2b2d42;
-  --lightgray: #8d99ae;
-  --whitegray: #edf2f4;
-  --navyblue: #3a506b;
-  --darknavy: #0b132b;
-  --gray: #2a2d34;
-  --lightblue: #62b6cb;
-  --AliceBlue: #f4faff;
-  --Platinum: #dee7e7;
-  --Thistle: #B7ADCF;
-  --PaynesGray: #4F646F;
-  --DavysGray: #535657;
-  --pink: #fc9886;
-  --darkerpink: #d89e94;
-  --lightblue: #93a7aa;
-  --darkerblue: #728992;
-  --blue: #6e8692;
-  --dustyrosepink: #C9A9A6;
-  --redpink: #A97982;
+  --obsidian: rgba(10, 10, 14, 0.95);
+  --smoked-glass: rgba(20, 20, 25, 0.85);
+  --hologram-cyan: #00f2ff;
+  --hologram-cyan-dim: rgba(0, 242, 255, 0.4);
+  --hologram-glow: 0 0 8px rgba(0, 242, 255, 0.5);
+  --warning-amber: #ffae00;
+  --warning-amber-glow: 0 0 15px rgba(255, 174, 0, 0.7);
+  --neon-green: #39ff14;
+  --neon-green-glow: 0 0 15px rgba(57, 255, 20, 0.7);
+  --laser-grid: rgba(0, 242, 255, 0.15);
+  --recessed-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.8), inset -1px -1px 2px rgba(255, 255, 255, 0.05);
+  --tactile-key-shadow: 0 4px 0 #008891, 0 8px 15px rgba(0, 0, 0, 0.5);
+  --tactile-key-active: 0 2px 0 #008891, 0 4px 8px rgba(0, 0, 0, 0.5);
 }
+
+@keyframes holographic-flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.92; }
+  10% { opacity: 0.98; }
+  15% { opacity: 0.94; }
+  20% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes neon-pulse {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+  100% { filter: brightness(1); }
+}
+
 
   /* --green: #6a7565;
   --artichokegreen: #888d7a; */

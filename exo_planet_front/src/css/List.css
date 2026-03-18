@@ -1,67 +1,114 @@
-/* 1. Main Page Layout */
+/* 1. Main Page Layout - The Obsidian Slab */
 .table-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
-  padding: 20px;
-  /* Deep space background (fallback color) */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px 10px;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow-x: auto; /* Ensure container scrolls if table is still too wide */
 }
 
-/* 2. The Table Wrapper */
+/* 2. The Table Wrapper - Smoked Glass / Obsidian */
 .table {
   width: 100%;
-  max-width: 95vw;
+  min-width: 1200px; /* Minimum width to prevent extreme squishing */
   border-collapse: separate;
   border-spacing: 0;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  background-color: rgba(22, 33, 62, 0.95);
-  
-  /* UPDATED: Reduced font size further */
-  font-size: 0.65rem; 
-  table-layout: auto;
+  background: var(--obsidian);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--hologram-cyan-dim);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 242, 255, 0.1);
+  font-size: 0.65rem; /* Reduced font size */
+  table-layout: fixed; /* Fixed layout for better control */
+  color: var(--hologram-cyan);
+  text-shadow: var(--hologram-glow);
+  animation: holographic-flicker 4s infinite;
 }
 
-/* 3. Header Styling */
+/* 3. Header Styling - Laser Grid */
 .table-header th {
-  background-color: #1a1a2e;
-  color: #4cc9f0;
-  padding: 10px 8px; /* Slightly reduced padding to match smaller font */
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--hologram-cyan);
+  padding: 10px 6px; /* Reduced padding */
   text-align: left;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-bottom: 2px solid #2e3b55;
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--hologram-cyan);
   white-space: nowrap;
-  
-  /* UPDATED: Reduced header font size further */
-  font-size: 0.6rem; 
+  font-size: 0.6rem; /* Reduced header font size */
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* 4. Row & Cell Styling */
-.table td {
-  padding: 8px 6px; /* Tighter cell padding */
-  color: #e0e0e0;
-  border-bottom: 1px solid #2e3b55;
+/* 4. Row & Cell Styling - Optical Scan Lines */
+.table td, .table th {
+  padding: 6px 6px; /* Reduced padding */
+  border-bottom: 1px solid var(--laser-grid);
+  border-right: 1px solid var(--laser-grid);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 200px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+  position: relative;
 }
 
-/* 5. Zebra Striping */
+/* Specific Column Widths for optimization */
+.table th:nth-child(1), .table td:nth-child(1) { width: 60px; text-align: center; } /* Action */
+.table th:nth-child(2), .table td:nth-child(2) { width: 50px; } /* ID */
+.table th:nth-child(3), .table td:nth-child(3) { width: 120px; } /* Name */
+.table th:nth-child(4), .table td:nth-child(4) { width: 100px; } /* Hostname */
+.table th:nth-child(5), .table td:nth-child(5) { width: 60px; } /* # Planets */
+.table th:nth-child(6), .table td:nth-child(6) { width: 120px; } /* Discovery Method */
+.table th:nth-child(7), .table td:nth-child(7) { width: 80px; } /* Discovery Year */
+.table th:nth-child(8), .table td:nth-child(8) { width: 120px; } /* Facility */
+.table th:nth-child(9), .table td:nth-child(9) { width: 80px; } /* Radius */
+.table th:nth-child(10), .table td:nth-child(10) { width: 80px; } /* Mass */
+.table th:nth-child(11), .table td:nth-child(11) { width: 80px; } /* Eq Temp */
+.table th:nth-child(12), .table td:nth-child(12) { width: 100px; } /* Spectral Type */
+.table th:nth-child(13), .table td:nth-child(13) { width: 80px; } /* Star Temp */
+.table th:nth-child(14), .table td:nth-child(14) { width: 80px; } /* Star Rad */
+.table th:nth-child(15), .table td:nth-child(15) { width: 80px; } /* Star Mass */
+.table th:nth-child(16), .table td:nth-child(16) { width: 80px; } /* Distance */
+.table th:nth-child(17), .table td:nth-child(17) { width: 90px; } /* Row Update */
+.table th:nth-child(18), .table td:nth-child(18) { width: 90px; } /* Release Date */
+
+/* Clickable and Expandable cells */
+.table td.expandable {
+  cursor: pointer;
+}
+
+/* Column expansion effect when active */
+.table td.expandable.is-expanded, 
+.table th.is-expanded {
+  width: 350px !important; /* Force expansion of the column */
+  white-space: normal;
+  overflow: visible;
+  background: rgba(0, 242, 255, 0.1);
+  box-shadow: inset 0 0 10px rgba(0, 242, 255, 0.2);
+  z-index: 5;
+}
+
+.table td:last-child {
+  border-right: none;
+}
+
+/* 5. Zebra Striping - Subtle Scan Line Effect */
 .table tbody tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(0, 242, 255, 0.03);
 }
 
-/* 6. Hover Effect */
+/* 6. Hover Effect - Bright Surge */
 .table tbody tr:hover {
-  background-color: rgba(76, 201, 240, 0.1);
-  cursor: default;
+  background-color: rgba(0, 242, 255, 0.1);
+  box-shadow: inset 0 0 15px rgba(0, 242, 255, 0.2);
+  cursor: crosshair;
 }
 
 /* 7. Pagination Controls */
@@ -69,34 +116,68 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
   margin-top: 20px;
-  color: #fff;
+  color: var(--hologram-cyan);
   font-weight: bold;
-  font-size: 0.8rem; /* Slightly smaller to match table */
+  font-size: 0.8rem;
+  text-shadow: var(--hologram-glow);
 }
 
-/* 8. Button Styling */
-.prev-button, .next-button {
-  background-color: #4cc9f0;
-  color: #0b0d17;
-  border: none;
-  padding: 6px 14px; /* Slightly smaller button padding */
-  border-radius: 6px;
-  font-weight: bold;
+/* 8. Button Styling - Tactile Heavy Keys */
+.prev-button, .next-button, .apply-filters-button {
+  background-color: #0b0d17;
+  color: var(--hologram-cyan);
+  border: 2px solid var(--hologram-cyan);
+  padding: 8px 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
-  transition: background 0.2s ease;
-  font-size: 0.75rem; /* Smaller button text */
+  transition: all 0.1s ease-in-out;
+  font-size: 0.7rem;
+  box-shadow: var(--tactile-key-shadow);
+  position: relative;
+  overflow: hidden;
 }
 
-.prev-button:hover, .next-button:hover {
-  background-color: #3db5d8;
-  transform: translateY(-1px);
+.prev-button:hover, .next-button:hover, .apply-filters-button:hover {
+  background-color: var(--hologram-cyan);
+  color: #000;
+  box-shadow: 0 0 20px var(--hologram-cyan);
+  transform: translateY(-2px);
+}
+
+.prev-button:active, .next-button:active, .apply-filters-button:active {
+  transform: translateY(2px);
+  box-shadow: var(--tactile-key-active);
 }
 
 .prev-button:disabled, .next-button:disabled {
-  background-color: #2e3b55;
-  color: #666;
+  background-color: #1a1a1a;
+  color: #444;
+  border-color: #444;
+  box-shadow: none;
   cursor: not-allowed;
   transform: none;
 }
+
+/* Habitability Highlight - Intense Orange Bleeding Glow */
+.row-habitable {
+  background: rgba(255, 174, 0, 0.05) !important;
+  color: var(--warning-amber) !important;
+  text-shadow: var(--warning-amber-glow) !important;
+  animation: neon-pulse 2s infinite ease-in-out;
+}
+
+.row-habitable td {
+  border-bottom: 1px solid var(--warning-amber) !important;
+  border-right: 1px solid rgba(255, 174, 0, 0.2) !important;
+}
+
+/* Selected Row - Obsidian Inset */
+.row-selected {
+  background: rgba(0, 242, 255, 0.15) !important;
+  box-shadow: inset 0 0 20px rgba(0, 242, 255, 0.3);
+}
+

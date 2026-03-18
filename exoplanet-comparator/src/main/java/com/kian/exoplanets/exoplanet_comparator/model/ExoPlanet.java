@@ -41,6 +41,8 @@ public class ExoPlanet {
 
     private BigDecimal sy_dist;
 
+    private BigDecimal pl_orbsmax;
+
     private LocalDateTime rowupdate;
 
     private LocalDateTime releasedate;
@@ -96,5 +98,22 @@ public class ExoPlanet {
 
     public LocalDateTime getReleasedate() { return releasedate; }
     public void setReleasedate(LocalDateTime releasedate) { this.releasedate = releasedate; }
+
+    public boolean getHabitability() {
+        if (this.pl_eqt == null) {
+            return falsef;
+        }
+
+        double eqTemp = this.pl_eqt.doubleValue();
+
+        // Checking if temperature falls between 175 K and 270 K
+        if (eqTemp >= 175.0 && eqTemp <= 270.0) {
+            return true;
+        } else if (eqTemp < 175.0) {
+            return false;
+        } else {
+            return false;
+        }
+    }
 }
 

@@ -4,8 +4,8 @@ function PlanetList() {
 
 
   return (
-    <div>
-      <h1 className="database-title">Exoplanet Database</h1>
+    <div className="planetlist-container">
+      <h1 className="database-title">EXOPLANET ARCHIVE</h1>
       <PlanetListComponent />
     </div>
   );
